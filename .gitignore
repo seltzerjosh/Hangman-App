@@ -102,3 +102,10 @@ dist
 
 # TernJS port file
 .tern-port
+.idea/aws.xml
+.idea/Hangman-App.iml
+.idea/vcs.xml
+.idea/modules.xml
+.idea/workspace.xml
+.idea/codeStyles/codeStyleConfig.xml
+example_phrase_html.txt
