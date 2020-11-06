@@ -26,7 +26,7 @@ class Phrase {
     }
 
     /**
-     * Reveals the letter(s) on the board when selected by playe
+     * Reveals the letter(s) on the board when selected
      * TODO: To reveal the amtching letter(s), select all letter DOM elements that have CSS class name that matches the selected letter
      * TODO: and replace element's css hide class with css show class
      */
