@@ -23,4 +23,11 @@ const game = new Game();
 
 document.getElementById('btn__reset').addEventListener('click', function start() {
     game.startGame();
+
+})
+
+document.addEventListener('click', (event) => {
+    if (event.target.type === 'submit') {
+        console.log(event.target.textContent)
+    }
 })

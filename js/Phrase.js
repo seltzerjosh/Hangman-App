@@ -14,7 +14,13 @@ class Phrase {
      * TODO: include class or id attributes needed
      */
     addPhraseToDisplay() {
-
+        for (let i = 0; i < this.phrase.length; i++) {
+            const phraseUL = document.getElementsByTagName('ul')[0];
+            const blank = document.createElement('li');
+            blank.id = this.phrase[i];
+            blank.className = (this.phrase[i] === ' ') ? `space` : `letter ${this.phrase[i]}`;
+            phraseUL.appendChild(blank);
+        }
     }
 
     /**

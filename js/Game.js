@@ -4,7 +4,6 @@
 
 class Game {
     /**
-     * TODO: Update phrases to pull from function
      */
     constructor() {
         this.missed = 0;
@@ -19,6 +18,8 @@ class Game {
     startGame() {
         document.getElementById('overlay').style.display = 'none';
         this.activePhrase = this.getRandomPhrase();
+        this.activePhrase = new Phrase(this.activePhrase);
+        this.activePhrase.addPhraseToDisplay();
     }
 
     /**
@@ -32,7 +33,7 @@ class Game {
 
     /**
      * Controls game logic
-     * TODO: checks to see if the button lcicked by the player matches a letter in the phrase
+     * TODO: checks to see if the button clicked by the player matches a letter in the phrase
      * TODO: Create game logic based on correct/incorrect guess
      * TODO: Logic parameters -
      * TODO:    - Disable the selected letter onscreen keyboard button
