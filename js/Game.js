@@ -24,7 +24,6 @@ class Game {
 
     /**
      * Randomly retrieves a phrase
-     * TODO: Retrieve a random phrase stored in phrases array and return it
      */
     getRandomPhrase() {
         const random = Math.floor(Math.random() * this.phrases.length);
