@@ -9,9 +9,6 @@ class Phrase {
 
     /**
      * Adds letter placeholders to the display on game start
-     * TODO: one li element for each letter
-     * TODO: Correct css usage for letter vs. space placeholders
-     * TODO: include class or id attributes needed
      */
     addPhraseToDisplay() {
         for (let i = 0; i < this.phrase.length; i++) {
@@ -27,16 +24,18 @@ class Phrase {
     * Checks to see if the letter selected by player matches a letter in the phrase
     *
     */
-    checkLetter() {
-
+    checkLetter(letter) {
+        const phrase = this.phrase;
+        const regex = new RegExp(letter, `g`);
+        return regex.test(phrase);
     }
 
     /**
      * Reveals the letter(s) on the board when selected
-     * TODO: To reveal the amtching letter(s), select all letter DOM elements that have CSS class name that matches the selected letter
-     * TODO: and replace element's css hide class with css show class
+     * TODO: To reveal the matching letter(s), select all letter DOM elements that have CSS class name that matches the selected letter
+     * TODO: and replace the element's css hide class with css show class
      */
     showMatchedLetter() {
-
+        console.log('show matched letter function');
     }
 }

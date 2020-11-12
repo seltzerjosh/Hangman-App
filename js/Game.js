@@ -32,16 +32,20 @@ class Game {
 
     /**
      * Controls game logic
-     * TODO: checks to see if the button clicked by the player matches a letter in the phrase
-     * TODO: Create game logic based on correct/incorrect guess
-     * TODO: Logic parameters -
-     * TODO:    - Disable the selected letter onscreen keyboard button
-     * TODO:    - If wrong guess, add the wrong CSS class to the letter's button and removeLife()
-     * TODO:    - If correct guess - add chosen CSS class to the letter's keyboard button, call showMatchedLetter() method on phrase then call checkForWin()
      * TODO:    - If won, call gameOver()
      */
-    handleInteraction() {
-
+    handleInteraction(letter,button) {
+        const regex = new RegExp(letter.toLowerCase(), 'g');
+        const phrase = this.activePhrase.phrase;
+        button.disabled = true;
+        if (regex.test(phrase)) {
+            button.className = 'chosen';
+            this.activePhrase.showMatchedLetter();
+            this.checkForWin();
+        } else {
+            button.className = 'wrong';
+            this.removeLife();
+        };
     }
 
     /**
@@ -59,7 +63,7 @@ class Game {
      */
 
     checkForWin() {
-
+        console.log('check for win function');
     }
 
     /**
