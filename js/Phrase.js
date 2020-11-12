@@ -9,21 +9,26 @@ class Phrase {
 
     /**
      * Adds letter placeholders to the display on game start
+     * Credit: reset phrases - https://www.javascripttutorial.net/dom/manipulating/remove-all-child-nodes/
      */
     addPhraseToDisplay() {
+        const phraseUL = document.getElementsByTagName('ul')[0];
+        while (phraseUL.firstChild) {
+            phraseUL.removeChild(phraseUL.firstChild);
+        }
         for (let i = 0; i < this.phrase.length; i++) {
-            const phraseUL = document.getElementsByTagName('ul')[0];
             const blank = document.createElement('li');
             blank.id = this.phrase[i];
-            blank.className = (this.phrase[i] === ' ') ? `space` : `letter ${this.phrase[i]}`;
+            blank.className = (this.phrase[i] === ' ') ? `space` : `hide letter ${this.phrase[i]}`;
+            blank.textContent = this.phrase[i];
             phraseUL.appendChild(blank);
         }
     }
 
     /**
-    * Checks to see if the letter selected by player matches a letter in the phrase
-    *
-    */
+     * Checks to see if the letter selected by player matches a letter in the phrase
+     *
+     */
     checkLetter(letter) {
         const phrase = this.phrase;
         const regex = new RegExp(letter, `g`);
@@ -32,10 +37,15 @@ class Phrase {
 
     /**
      * Reveals the letter(s) on the board when selected
-     * TODO: To reveal the matching letter(s), select all letter DOM elements that have CSS class name that matches the selected letter
-     * TODO: and replace the element's css hide class with css show class
+     * Credit: Getting second className - Sarfraz @ https://stackoverflow.com/questions/4239947/how-to-get-the-second-class-name-from-element
      */
-    showMatchedLetter() {
-        console.log('show matched letter function');
+    showMatchedLetter(letter) {
+        const letterSpaces = document.getElementsByClassName('letter');
+        for (let i = 0; i < letterSpaces.length; i++) {
+            const letterOnBoard = letterSpaces[i].getAttribute('class').split(' ')[2];
+            if (letterOnBoard === letter) {
+                letterSpaces[i].className = letterSpaces[i].className.replace(/hide/, 'show');
+            }
+        }
     }
 }

@@ -29,7 +29,7 @@ document.getElementById('btn__reset').addEventListener('click', function start()
 document.addEventListener('click', (event) => {
     const letter = event.target.textContent;
     const button = event.target;
-    if (event.target.type === 'submit') {
+    if (event.target.type === 'submit' && event.target.id !== 'btn__reset') {
         game.handleInteraction(letter, button);
     }
 })

@@ -40,12 +40,14 @@ class Game {
         button.disabled = true;
         if (regex.test(phrase)) {
             button.className = 'chosen';
-            this.activePhrase.showMatchedLetter();
-            this.checkForWin();
+            this.activePhrase.showMatchedLetter(letter);
+            if (this.checkForWin()) {
+                this.gameOver();
+            }
         } else {
             button.className = 'wrong';
             this.removeLife();
-        };
+        }
     }
 
     /**
@@ -55,7 +57,11 @@ class Game {
      * TODO: If five missed guesses then end game by calling gameOver()
      */
     removeLife() {
-
+        const hearts = document.getElementsByClassName('tries');
+        for (let i = hearts.length - 1; i >= 0; i--) {
+            console.log(hearts[i]);
+            console.log(i);
+        }
     }
 
     /**
@@ -63,16 +69,29 @@ class Game {
      */
 
     checkForWin() {
-        console.log('check for win function');
+        const letterSpaces = document.getElementsByClassName('letter');
+        for (let i = 0; i < letterSpaces.length; i++) {
+            const status = letterSpaces[i].getAttribute('class').split(' ')[0];
+            if (status === 'hide') {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
      * Displays original start screen with won/loss status
-     * TODO: Display original start screen overlay
      * TODO: outcome dependent - update overlay h1 w/won or loss message
      * TODO: Replace overlay's start CSS class with either the win or lose CSS class
      */
     gameOver() {
+        document.getElementById('overlay').style.display = 'block';
+        this.activePhrase = this.getRandomPhrase();
+        this.activePhrase = new Phrase(this.activePhrase);
+        this.activePhrase.addPhraseToDisplay();
 
+        while (document.getElementsByClassName('chosen').length > 0) {
+            document.getElementsByClassName('chosen')[0].className = 'key' ;
+        }
     }
 }
