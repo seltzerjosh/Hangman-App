@@ -3,8 +3,6 @@
  * Game.js */
 
 class Game {
-    /**
-     */
     constructor() {
         this.missed = 0;
         this.phrases = ['test phrase', 'test phrase two'];
@@ -32,6 +30,8 @@ class Game {
 
     /**
      * Controls game logic
+     * @param {string} letter - the letter entered/clicked
+     * @param {element} button - the associated DOM element to that letter
      */
     handleInteraction(letter, button) {
         const regex = new RegExp(letter.toLowerCase(), 'g');

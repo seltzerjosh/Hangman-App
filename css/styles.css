@@ -189,6 +189,8 @@ button {
 
 .win {
   background-color: var(--color-win);
+  animation: pulse;
+  animation-duration: 2s;
 }
 
 .win a {

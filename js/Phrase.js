@@ -27,6 +27,7 @@ class Phrase {
 
     /**
      * Checks to see if the letter selected by player matches a letter in the phrase
+     * @param {string} letter - the letter entered/clicked
      *
      */
     checkLetter(letter) {
@@ -37,6 +38,7 @@ class Phrase {
 
     /**
      * Reveals the letter(s) on the board when selected
+     * @param {string} letter - the letter entered/clicked
      * Credit: Getting second className - Sarfraz @ https://stackoverflow.com/questions/4239947/how-to-get-the-second-class-name-from-element
      */
     showMatchedLetter(letter) {
