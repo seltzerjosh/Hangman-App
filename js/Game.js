@@ -5,7 +5,13 @@
 class Game {
     constructor() {
         this.missed = 0;
-        this.phrases = ['a beautiful phrase', 'so much free energy', 'small price to pay', 'wind turbines are scary', 'no thank you'];
+        this.phrases = [
+            new Phrase('a beautiful phrase'),
+            new Phrase('so much free energy'),
+            new Phrase('small price to pay'),
+            new Phrase('wind turbines are scary'),
+            new Phrase('no thank you')
+        ];
         this.activePhrase = null;
     }
 
@@ -15,7 +21,6 @@ class Game {
     startGame() {
         document.getElementById('overlay').style.display = 'none';
         this.activePhrase = this.getRandomPhrase();
-        this.activePhrase = new Phrase(this.activePhrase);
         this.activePhrase.addPhraseToDisplay();
     }
 
@@ -88,7 +93,6 @@ class Game {
     gameOver() {
         document.getElementById('overlay').style.display = 'block';
         this.activePhrase = this.getRandomPhrase();
-        this.activePhrase = new Phrase(this.activePhrase);
         this.activePhrase.addPhraseToDisplay();
 
         if (this.missed === 5) {
