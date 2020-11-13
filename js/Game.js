@@ -32,9 +32,8 @@ class Game {
 
     /**
      * Controls game logic
-     * TODO:    - If won, call gameOver()
      */
-    handleInteraction(letter,button) {
+    handleInteraction(letter, button) {
         const regex = new RegExp(letter.toLowerCase(), 'g');
         const phrase = this.activePhrase.phrase;
         button.disabled = true;
@@ -52,15 +51,20 @@ class Game {
 
     /**
      * Removes a life from the scored
-     * TODO: Remove a life from scoreboard by replacing one liveHeart.png with lostHeart.png
-     * TODO: Increment missed property
-     * TODO: If five missed guesses then end game by calling gameOver()
      */
     removeLife() {
         const hearts = document.getElementsByClassName('tries');
+
         for (let i = hearts.length - 1; i >= 0; i--) {
-            console.log(hearts[i]);
-            console.log(i);
+            if (hearts[i].firstElementChild.alt === 'Heart Icon') {
+                hearts[i].firstElementChild.src = 'images/lostHeart.png';
+                hearts[i].firstElementChild.alt = 'Empty Heart Icon';
+                this.missed += 1;
+                break;
+            }
+        }
+        if (this.missed === 5) {
+            this.gameOver();
         }
     }
 
@@ -81,8 +85,6 @@ class Game {
 
     /**
      * Displays original start screen with won/loss status
-     * TODO: outcome dependent - update overlay h1 w/won or loss message
-     * TODO: Replace overlay's start CSS class with either the win or lose CSS class
      */
     gameOver() {
         document.getElementById('overlay').style.display = 'block';
@@ -90,8 +92,12 @@ class Game {
         this.activePhrase = new Phrase(this.activePhrase);
         this.activePhrase.addPhraseToDisplay();
 
-        while (document.getElementsByClassName('chosen').length > 0) {
-            document.getElementsByClassName('chosen')[0].className = 'key' ;
+        if (this.missed === 5) {
+            document.getElementById('game-over-message').textContent = 'loser loser chicken skewer';
+            document.getElementById('overlay').className = 'lose';
+        } else {
+            document.getElementById('game-over-message').textContent = 'winner winner chicken dinner';
+            document.getElementById('overlay').className = 'win';
         }
     }
 }

@@ -9,27 +9,53 @@
 const game = new Game();
 
 /**
- * Listens for button clicks
- * TODO: Event Listener - on button click, call handleInteraction() on the Game object
- */
-
-/**
  * Listens for start game button press
- * TODO: Event Listener - on start-gane click, call startGame()
- * TODO:                - Remove all li elements from the Phrase u1 element
- * TODO:                - Enable all the onscreen keyboard buttons and update each to use the key CSS class
- * TODO:                - Reset all the heart images to liveHeart.png
  */
 
 document.getElementById('btn__reset').addEventListener('click', function start() {
     game.startGame();
 
+    const hearts = document.getElementsByClassName('tries');
+    for (let i = hearts.length - 1; i >= 0; i--) {
+        hearts[i].firstElementChild.src = 'images/liveHeart.png';
+        hearts[i].firstElementChild.alt = 'Heart Icon';
+    }
+
+    while (document.getElementsByClassName('chosen').length > 0) {
+        document.getElementsByClassName('chosen')[0].disabled = false;
+        document.getElementsByClassName('chosen')[0].className = 'key';
+
+    }
+    while (document.getElementsByClassName('wrong').length > 0) {
+        document.getElementsByClassName('wrong')[0].disabled = false;
+        document.getElementsByClassName('wrong')[0].className = 'key';
+
+    }
+    game.missed = 0;
+
 })
 
+/**
+ * Listens for button clicks
+ */
 document.addEventListener('click', (event) => {
     const letter = event.target.textContent;
     const button = event.target;
     if (event.target.type === 'submit' && event.target.id !== 'btn__reset') {
+        game.handleInteraction(letter, button);
+    }
+})
+
+document.addEventListener('keydown', (event) => {
+    const letter = event.key;
+    const buttons = document.getElementsByClassName('key');
+    let button;
+    for (let i = 0; i < buttons.length; i++) {
+        if (buttons[i].textContent === letter) {
+            button = buttons[i]
+        }
+    }
+    if (button) {
         game.handleInteraction(letter, button);
     }
 })
